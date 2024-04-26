@@ -22,6 +22,9 @@ const todoSchema = new mongoose.Schema(
     flag: {
       type: String,
     },
+    userId: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

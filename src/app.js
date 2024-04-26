@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth.route.js";
+import todoRouter from "./routes/todo.route.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/todo", todoRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to todo api i bulit as an assignment for fire ai");
