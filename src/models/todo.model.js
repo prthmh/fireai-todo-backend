@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-// title, description, status (completed or not), and any other relevant
-// information.
 const todoSchema = new mongoose.Schema(
   {
     title: {
