@@ -23,7 +23,9 @@ async function createTodo(req, res) {
 
     await todo.save();
 
-    res.status(201).json({ todo });
+    const todos = await Todo.find({ username: user.username });
+
+    res.status(201).json({ todos });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -57,7 +59,7 @@ async function editTodo(req, res) {
       return res.status(404).json({ errors: "Todo not found" });
     }
 
-    const todos = await Todo.find();
+    const todos = await Todo.find({ username: user.username });
 
     res.status(200).json({ todos });
   } catch (err) {
@@ -68,10 +70,11 @@ async function editTodo(req, res) {
 
 async function deleteTodo(req, res) {
   const todoId = req.params.todoId;
+  const user = req.user;
   await Todo.findByIdAndDelete(todoId);
 
-  const posts = await Todo.find();
-  res.status(201).json({ posts });
+  const todos = await Todo.find({ username: user.username });
+  res.status(201).json({ todos });
 }
 
 async function getAllTodosofUser(req, res) {
