@@ -86,4 +86,20 @@ async function getAllTodosofUser(req, res) {
   }
 }
 
-export { createTodo, editTodo, deleteTodo, getAllTodosofUser };
+async function getTodoById(req, res) {
+  try {
+    const todoId = req.params.todoId;
+    const todo = await Todo.findById(todoId);
+
+    if (!todo) {
+      return res.status(404).json({ errors: ["Todo not found"] });
+    }
+
+    res.status(200).json({ todo });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+export { createTodo, editTodo, deleteTodo, getAllTodosofUser, getTodoById };
