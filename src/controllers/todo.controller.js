@@ -7,6 +7,7 @@ async function createTodo(req, res) {
       return res.status(404).json({ error: "No user" });
     }
     const { todoData } = req.body;
+    console.log(req.body);
     if (!todoData) {
       return res.status(400).json({ error: "No todo" });
     }
@@ -17,7 +18,7 @@ async function createTodo(req, res) {
       status: todoData.status,
       priority: todoData.priority,
       flag: todoData.flag,
-      userId: user._id,
+      userId: todoData.userId,
     });
 
     await todo.save();
@@ -73,9 +74,10 @@ async function deleteTodo(req, res) {
   res.status(201).json({ posts });
 }
 
-async function getAllTodos(req, res) {
+async function getAllTodosofUser(req, res) {
   try {
-    const todos = await Todo.find();
+    const user = req.user;
+    const todos = await Todo.find({ userId: user._id });
 
     res.status(200).json({ todos });
   } catch (err) {
@@ -84,4 +86,4 @@ async function getAllTodos(req, res) {
   }
 }
 
-export { createTodo, editTodo, deleteTodo, getAllTodos };
+export { createTodo, editTodo, deleteTodo, getAllTodosofUser };
