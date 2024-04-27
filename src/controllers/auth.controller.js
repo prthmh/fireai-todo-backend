@@ -75,7 +75,7 @@ async function login(req, res) {
       return res.status(200).json({
         user: {
           username: foundUser.username,
-          emai: foundUser.email,
+          email: foundUser.email,
           fullname: foundUser.fullname,
         },
         encodedToken: token,

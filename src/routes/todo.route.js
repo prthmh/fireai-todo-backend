@@ -9,8 +9,8 @@ import verifyToken from "../middlewares/verify.middleware.js";
 
 const todoRouter = express.Router();
 
-todoRouter.get("/", verifyToken, getAllTodosofUser);
 todoRouter.post("/", verifyToken, createTodo);
+todoRouter.get("/:username", getAllTodosofUser);
 todoRouter.post("/edit/:todoId", verifyToken, editTodo);
 todoRouter.delete("/:todoId", verifyToken, deleteTodo);
 

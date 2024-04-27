@@ -22,7 +22,7 @@ const todoSchema = new mongoose.Schema(
     flag: {
       type: String,
     },
-    userId: {
+    username: {
       type: String,
     },
   },
