@@ -18,7 +18,7 @@ async function createTodo(req, res) {
       status: todoData.status,
       priority: todoData.priority,
       flag: todoData.flag,
-      userId: todoData.userId,
+      userId: user.id,
     });
 
     await todo.save();
@@ -77,7 +77,8 @@ async function deleteTodo(req, res) {
 async function getAllTodosofUser(req, res) {
   try {
     const user = req.user;
-    const todos = await Todo.find({ userId: user._id });
+    console.log("user id", user);
+    const todos = await Todo.find({ userId: user.id });
 
     res.status(200).json({ todos });
   } catch (err) {
