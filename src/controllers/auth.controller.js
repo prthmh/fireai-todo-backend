@@ -19,26 +19,26 @@ async function signup(req, res) {
 
     // const saltRounds = 10;
     // const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const newUSer = new User({
+    const newUser = new User({
       email,
       username,
       fullname,
       password,
     });
 
-    await newUSer.save();
+    await newUser.save();
     // console.log("signup", password, hashedPassword);
 
     const token = jwt.sign(
-      { id: newUSer._id, username: newUSer.username },
+      { id: newUser._id, username: newUser.username },
       secret
     );
 
-    const user = { ...newUSer._doc };
+    const user = { ...newUser._doc };
     delete user.password;
 
     res.status(201).json({
-      newUSer,
+      user: newUser,
       encodedToken: token,
     });
   } catch (err) {
